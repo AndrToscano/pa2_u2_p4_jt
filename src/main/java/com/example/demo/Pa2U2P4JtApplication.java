@@ -28,7 +28,19 @@ public class Pa2U2P4JtApplication implements CommandLineRunner{
 		estudiante.setEdad("26");
 		estudiante.setCedula("1724693740");
 		
+		//CRUD
+		//Insertar
 		this.estudianteService.registrar(estudiante);
+		//Guardar
+		this.estudianteService.guardar(estudiante);
+		
+		//Buscar y Actualizar
+		this.estudianteService.buscar("1724693740");
+		estudiante.setNombre("Andres");
+		this.estudianteService.guardar(estudiante);
+		
+		//Borrar
+		this.estudianteService.borrar("1724693740");
 	}
 	
 	

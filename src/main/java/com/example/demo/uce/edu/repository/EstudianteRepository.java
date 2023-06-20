@@ -5,4 +5,7 @@ import com.example.demo.uce.edu.repository.model.Estudiante;
 public interface EstudianteRepository {
 
 	public void insertar(Estudiante estudiante);
+	public void actualizar(Estudiante estudiante);
+	public Estudiante seleccionar(String cedula);
+	public void eliminar(String cedula);
 }
