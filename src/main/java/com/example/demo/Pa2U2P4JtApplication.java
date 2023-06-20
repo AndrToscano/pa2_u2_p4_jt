@@ -40,7 +40,7 @@ public class Pa2U2P4JtApplication implements CommandLineRunner{
 		this.estudianteService.guardar(estudiante);
 		
 		//Borrar
-		this.estudianteService.borrar("1724693740");
+		//this.estudianteService.borrar("1724693740");
 	}
 	
 	
