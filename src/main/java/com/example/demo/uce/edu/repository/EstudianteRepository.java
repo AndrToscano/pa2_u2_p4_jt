@@ -18,4 +18,7 @@ public interface EstudianteRepository {
 	
 	//Typed Query
 	public Estudiante seleccionarApellidoTyped(String apellido);
+	
+	//Named Query
+	public Estudiante seleccionarPorApellido(String apellido);
 }
