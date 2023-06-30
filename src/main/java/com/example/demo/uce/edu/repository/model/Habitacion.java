@@ -2,15 +2,19 @@ package com.example.demo.uce.edu.repository.model;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
-
+@Table(name = "habitacion", schema = "public")
+@Entity
 public class Habitacion {
 
 	@Id
@@ -26,7 +30,7 @@ public class Habitacion {
 	private BigDecimal valor;
 	
 	@JoinColumn(name = "habit_id_hotel")
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Hotel hotel;
 
 	

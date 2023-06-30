@@ -1,26 +1,28 @@
 package com.example.demo;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.uce.edu.repository.model.Ciudadano;
-import com.example.demo.uce.edu.repository.model.Empleado;
-import com.example.demo.uce.edu.service.CiudadanoService;
-import com.example.demo.uce.edu.service.EmpleadoService;
+import com.example.demo.uce.edu.repository.model.Habitacion;
+import com.example.demo.uce.edu.repository.model.Hotel;
+import com.example.demo.uce.edu.service.HabitacionService;
+import com.example.demo.uce.edu.service.HotelService;
 
 
 @SpringBootApplication
 public class Pa2U2P4JtApplication implements CommandLineRunner{
 
-	@Autowired
-	private CiudadanoService ciudadanoService;
+    @Autowired
+	private HabitacionService habitacionService;
 	
-	@Autowired
-	private EmpleadoService empleadoService;
+    @Autowired
+	private HotelService hotelService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P4JtApplication.class, args);
@@ -28,33 +30,32 @@ public class Pa2U2P4JtApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
 	
-		Ciudadano ciudadano = new Ciudadano();
-		Empleado empleado = new Empleado();
+		Hotel hotel = new Hotel();
+		Habitacion habitacion = new Habitacion();
+		List<Habitacion> habitaciones = new ArrayList<>();
 		
-	
-		ciudadano.setApellido("Toscano");
-		ciudadano.setNombre("Juan");
-		ciudadano.setCedula("1724693740");
+		//Hotel 
+		hotel.setNombre("Hilton Colon");
+		hotel.setDireccion("Av. Colon");
 		
-		
-		empleado.setCargo("Fiscalizador");
-		empleado.setSueldo(new BigDecimal(800));
-
-		//Relacion 
-		//ciudadano.setEmpleado(empleado);
-		empleado.setCiudadano(ciudadano);
+		//Habitacion
+		habitacion.setNumero("02");
+		habitacion.setValor(new BigDecimal(120));
+		habitaciones.add(habitacion);
 		
 		//CRUD
-		//this.ciudadanoService.registrar(ciudadano);
-		//this.ciudadanoService.guardar(ciudadano);
-		//this.ciudadanoService.buscar(1);
-		//this.ciudadanoService.borrar(1);
 		
-		this.empleadoService.registrar(empleado);
-		//this.empleadoService.guardar(empleado);
-		//this.empleadoService.buscar(1);
-		//this.empleadoService.borrar(1);
+		//hotel.setHabitaciones(habitaciones);
+		//this.hotelService.registrar(hotel);
+		//this.hotelService.guardar(hotel);
+		//this.hotelService.buscar(1);
+		//this.hotelService.borrar(1);
+		
+		habitacion.setHotel(hotel);
+		this.habitacionService.registrar(habitacion);
+		this.habitacionService.guardar(habitacion);
+		this.habitacionService.buscar(1);
+		this.habitacionService.borrar(1);
 	}
 }
