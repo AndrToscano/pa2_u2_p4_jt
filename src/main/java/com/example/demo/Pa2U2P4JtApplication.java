@@ -1,28 +1,23 @@
 package com.example.demo;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.uce.edu.repository.model.Habitacion;
-import com.example.demo.uce.edu.repository.model.Hotel;
-import com.example.demo.uce.edu.service.HabitacionService;
-import com.example.demo.uce.edu.service.HotelService;
+import com.example.demo.uce.edu.repository.model.Autor;
+import com.example.demo.uce.edu.repository.model.Libro;
+import com.example.demo.uce.edu.service.AutorService;
 
 
 @SpringBootApplication
 public class Pa2U2P4JtApplication implements CommandLineRunner{
 
-    @Autowired
-	private HabitacionService habitacionService;
-	
-    @Autowired
-	private HotelService hotelService;
+	@Autowired
+    private AutorService autorService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P4JtApplication.class, args);
@@ -31,31 +26,38 @@ public class Pa2U2P4JtApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 	
-		Hotel hotel = new Hotel();
-		Habitacion habitacion = new Habitacion();
-		List<Habitacion> habitaciones = new ArrayList<>();
+		Autor autor = new Autor();
+		Libro libro1 = new Libro();
+		Libro libro2 = new Libro();
 		
-		//Hotel 
-		hotel.setNombre("Hilton Colon");
-		hotel.setDireccion("Av. Colon");
+		Set<Autor> autores = new HashSet<>();
+		Set<Libro> libros = new HashSet<>();
 		
-		//Habitacion
-		habitacion.setNumero("02");
-		habitacion.setValor(new BigDecimal(120));
-		habitaciones.add(habitacion);
+		//Autor
+		autor.setApellido("Cortazar");
+		autor.setNombre("Andres");
+		
+		//Libro
+		libro1.setTitulo("Lo que el viento se llevo");
+		libro1.setEditorial("AYLLA");
+		
+		
+		libro2.setTitulo("See you");
+		libro2.setEditorial("London");
+		
+		libros.add(libro1);
+		libros.add(libro2);
+		autores.add(autor);
+		
+		//Relacion
+		autor.setLibros(libros);
+		libro1.setAutores(autores);
+		libro2.setAutores(autores);
 		
 		//CRUD
-		
-		//hotel.setHabitaciones(habitaciones);
-		//this.hotelService.registrar(hotel);
-		//this.hotelService.guardar(hotel);
-		//this.hotelService.buscar(1);
-		//this.hotelService.borrar(1);
-		
-		habitacion.setHotel(hotel);
-		this.habitacionService.registrar(habitacion);
-		this.habitacionService.guardar(habitacion);
-		this.habitacionService.buscar(1);
-		this.habitacionService.borrar(1);
+		this.autorService.registrar(autor);
+		this.autorService.guardar(autor);
+		this.autorService.buscar(1);
+		this.autorService.borrar(1);
 	}
 }
