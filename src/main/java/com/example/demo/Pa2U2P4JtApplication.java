@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,15 +8,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.uce.edu.repository.model.Automovil;
-import com.example.demo.uce.edu.service.AutomovilService;
+import com.example.demo.uce.edu.repository.model.Estudiante;
+import com.example.demo.uce.edu.service.EstudianteService;
 
 
 @SpringBootApplication
 public class Pa2U2P4JtApplication implements CommandLineRunner{
 
 	@Autowired
-    private AutomovilService automovilService;
+    private EstudianteService estudianteService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P4JtApplication.class, args);
@@ -26,38 +25,45 @@ public class Pa2U2P4JtApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 	
-		Automovil automovil = new Automovil();
-		List<Automovil> automoviles =  new ArrayList<>();
-		List<Automovil> automovilesTyped =  new ArrayList<>();
-
-		automovil.setMarca("Toyota");
-		automovil.setModelo("Corrolla");
-		automovil.setAnio(2004);
-		automovil.setPrecio(new BigDecimal(14500));
+		Estudiante estudiante = new Estudiante();
+		List<Estudiante> estudiantes = new ArrayList<>();
+	
+		estudiante.setApellido("Toscano");
+		estudiante.setNombre("Monica");
+		estudiante.setEdad("24");
+		estudiante.setCedula("1578984621");
 		
 		//CRUD
-		//this.automovilService.registrar(automovil);
+		//this.estudianteService.registrar(estudiante);
+		
+		//CONSULTAS SQL - JPQL
 		
 		//Query
-		//SingleResult
-		System.out.println(this.automovilService.buscarModelo("Corrolla"));
-		
-		//ResultList
-		automoviles = this.automovilService.buscarMarcaYModelo("Toyota", "Corrolla");
-		for(Automovil e: automoviles) {
-			System.out.println(e);
+		System.out.println(this.estudianteService.buscarApellido("Silva"));
+		  
+		  //Generar Lista de manera ordenada
+		estudiantes = this.estudianteService.buscarListaApellido("Toscano");
+		for(Estudiante e: estudiantes) {
+		System.out.println(e);
 		}
 		
+		System.out.println(this.estudianteService.buscarApellidoYNombre("Toscano", "Andres"));
 		
-		//typedQuery
-		//SingleResult
-		System.out.println(this.automovilService.buscarModeloTyped("Corrolla"));
+		//Typed Query
+		System.out.println(this.estudianteService.buscarApellidoTyped("Silva"));
 		
-		//ResultList
-		automovilesTyped = this.automovilService.buscarPorAnio(2000);
+		//Named Query
+		System.out.println(this.estudianteService.buscarPorApellido("Silva"));
+		System.out.println(this.estudianteService.buscarPorApellidoNamedQuery("Silva"));
+		System.out.println(this.estudianteService.buscarPorNombreNamedQuery("Andres"));
 		
-		for(Automovil e: automovilesTyped) {
-			System.out.println(e);
-		}
+		//Native Query
+		System.out.println(this.estudianteService.buscarPorApellidoNativeQuery("Silva"));
+		System.out.println(this.estudianteService.buscarPorApellidoNativeQueryNamed("Silva"));
+		System.out.println(this.estudianteService.buscarPorNombreNativeQueryNamed("Andres"));
+		
+		//Criteria API Query
+		System.out.println(this.estudianteService.buscarPorApellidoCriteriaAPIQuery("Silva"));
+		
 	}
 }

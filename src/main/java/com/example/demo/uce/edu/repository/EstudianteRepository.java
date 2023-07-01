@@ -21,4 +21,15 @@ public interface EstudianteRepository {
 	
 	//Named Query
 	public Estudiante seleccionarPorApellido(String apellido);
+	public Estudiante seleccionarPorApellidoNamedQuery(String apellido);
+	public Estudiante seleccionarPorNombreNamedQuery(String nombre);
+	
+	//Native Query
+	public Estudiante seleccionarPorApellidoNativeQuery(String apellido);
+	public Estudiante seleccionarPorApellidoNativeQueryNamed(String apellido);
+	public Estudiante seleccionarPorNombreNativeQueryNamed(String nombre);
+
+	//Criteria API Query
+	public Estudiante seleccionarPorApellidoCriteriaAPIQuery(String apellido);
+
 }
